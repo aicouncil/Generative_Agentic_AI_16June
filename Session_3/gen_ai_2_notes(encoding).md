@@ -273,6 +273,85 @@ model.summary()
 | Padding           | Making all sequences the same length               |
 | Use in AI Models  | Required for embedding, RNN, LSTM, or transformer inputs |
 
+# 📊 Comparison: BoW vs TF-IDF vs Integer Encoding
+
+| **Feature**                   | **Bag of Words (BoW)**                | **TF-IDF (Term Frequency - Inverse Document Frequency)** | **Integer Encoding**                  |
+|-------------------------------|---------------------------------------|----------------------------------------------------------|---------------------------------------|
+| **Representation**            | Binary or frequency count vectors     | Weighted frequency based on importance                   | Unique integer ID for each word       |
+| **Preserves Word Order**      | ❌ No                                 | ❌ No                                                    | ✅ Yes                                |
+| **Vocabulary Dependent**      | ✅ Yes                                | ✅ Yes                                                   | ✅ Yes                                |
+| **Handles Word Importance**   | ❌ No (all words treated equally)     | ✅ Yes (weights rare/important words higher)              | ❌ No (IDs don't reflect importance)  |
+| **Output Format**             | Sparse vector (high dimensional)      | Sparse vector (float, high dimensional)                  | Dense list of integers                |
+| **Input to Embedding Layer**  | ❌ No (must be one-hot or dense)      | ❌ No                                                    | ✅ Yes (commonly used)                |
+| **Handles Rare Words**        | Poorly (vocab explosion)              | Better (down-weights common words)                       | Poorly unless OOV token is handled    |
+| **Interpretable**             | ✅ Yes                                | ✅ Partially (weights can be hard to interpret)           | ❌ No (IDs don’t carry semantic meaning) |
+| **Suited For**                | Traditional ML (Naive Bayes, SVM, Logistic) | Traditional ML & feature engineering                 | Deep Learning (RNN, LSTM, Transformer with embedding) |
+| **Memory Efficiency**         | ❌ Poor (large vocab = huge sparse vectors) | ❌ Poor (still sparse and float-heavy)               | ✅ High (compact and integer-based)    |
+| **Example**                   | "I love AI" → `[1, 0, 1, 0, 1]`      | "I love AI" → `[0.7, 0.0, 0.6, 0.0, 0.8]`                | "I love AI" → `[2, 5, 1]` <br>*(where {'ai':1, 'i':2, 'love':5})* |
+
+
+---
+
+## 🟢 Pros & 🔴 Cons of Each Technique
+
+### 🧮 1. Bag of Words (BoW)
+
+**✅ Pros:**
+- Simple and intuitive
+- Easy to implement
+- Works well for small datasets and traditional models
+
+**❌ Cons:**
+- Doesn’t consider word order or context
+- High dimensional (sparse vectors)
+- Fails to differentiate between important and common words
+
+---
+
+### 📏 2. TF-IDF
+
+**✅ Pros:**
+- Adds significance to unique/rare words
+- Helps improve classification performance over BoW
+- Still compatible with classic ML algorithms
+
+**❌ Cons:**
+- Doesn’t handle word order or semantics
+- Still results in large, sparse vectors
+- Not suitable for deep learning without further transformation
+
+---
+
+### 🔢 3. Integer Encoding
+
+**✅ Pros:**
+- Retains word order
+- Compact and efficient for memory
+- Perfect for deep learning models using embeddings (LSTM, BERT)
+
+**❌ Cons:**
+- Integer IDs carry no inherent meaning (1 ≠ better than 2)
+- Needs padding/truncation
+- Sensitive to vocabulary and out-of-vocabulary (OOV) issues
+
+---
+
+## ✅ Which to Use When?
+
+| **Use Case**                              | **Recommended Encoding**                 |
+|-------------------------------------------|------------------------------------------|
+| Simple text classification (Logistic, NB) | BoW or TF-IDF                            |
+| Large corpus, need rare word handling     | TF-IDF                                   |
+| Deep learning models (LSTM, Transformers) | Integer Encoding + Embedding             |
+| Interpretability needed                   | BoW (easiest to explain)                 |
+
+---
+
+## 🧠 Final Thoughts
+
+- BoW and TF-IDF are good for quick experiments and traditional ML.
+- Integer Encoding is essential for deep learning pipelines, especially when combined with word embeddings or transformers.
+
 ## 🚀 What’s Next?
 
 Once text is encoded:
