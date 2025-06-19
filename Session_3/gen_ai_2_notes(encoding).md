@@ -121,6 +121,158 @@ pd.DataFrame(tfidf_matrix.toarray(), columns=vectorizer.get_feature_names_out())
 
 ---
 
+# Integer Encoding (Word Index Encoding) in NLP
+
+## ✅ What is Integer Encoding?
+
+Integer Encoding is a foundational technique in Natural Language Processing (NLP) where each unique word in a dataset is assigned a unique integer ID.
+
+---
+
+### 📌 Purpose
+
+To convert text into numerical format that can be understood and processed by machine learning or deep learning models.
+
+---
+
+## 💬 Example Input
+
+```python
+texts = [
+    "Generative AI is intresting",
+    "AI is tranforming the world",
+    "I want to know about AI more"
+]
+```
+These are raw text sentences — in natural language.
+
+---
+
+## 🧠 Step-by-Step Explanation
+
+### 🔹 Step 1: Initialize and Fit the Tokenizer
+
+```python
+from tensorflow.keras.preprocessing.text import Tokenizer
+
+tokenizer = Tokenizer()
+tokenizer.fit_on_texts(texts)
+```
+
+#### What happens here?
+
+- The tokenizer scans all three sentences.
+- Builds a word frequency dictionary.
+- Assigns unique integers to each word based on frequency.
+
+#### 🔍 Word Index Generated
+
+```python
+print(tokenizer.word_index)
+```
+**Output:**
+```python
+{
+  'ai': 1, 'is': 2, 'generative': 3, 'intresting': 4,
+  'tranforming': 5, 'the': 6, 'world': 7, 'i': 8,
+  'want': 9, 'to': 10, 'know': 11, 'about': 12, 'more': 13
+}
+```
+> 🧠 Note: 'ai' is the most frequent word → assigned 1, 'more' is least frequent → assigned 13
+
+---
+
+### 🔹 Step 2: Convert Texts to Integer Sequences
+
+```python
+sequences = tokenizer.texts_to_sequences(texts)
+print(sequences)
+```
+
+**Output:**
+```python
+[[3, 1, 2, 4], [1, 2, 5, 6, 7], [8, 9, 10, 11, 12, 1, 13]]
+```
+
+| Original Sentence                | Integer Sequence            |
+| -------------------------------- | -------------------------- |
+| "Generative AI is intresting"    | [3, 1, 2, 4]               |
+| "AI is tranforming the world"    | [1, 2, 5, 6, 7]            |
+| "I want to know about AI more"   | [8, 9, 10, 11, 12, 1, 13]  |
+
+✅ This numerical format is model-ready for neural networks.
+
+---
+
+### 🔹 Step 3: Padding the Sequences
+
+```python
+from keras.utils import pad_sequences
+padded_sequences = pad_sequences(sequences, padding='post')
+```
+
+#### 📌 Why Padding?
+Neural networks require inputs of the same length. So shorter sequences are padded with 0s.
+
+**Output:**
+```python
+array([
+  [ 3,  1,  2,  4,  0,  0,  0],
+  [ 1,  2,  5,  6,  7,  0,  0],
+  [ 8,  9, 10, 11, 12,  1, 13]
+])
+```
+> 🧠 This makes all input vectors uniform in shape.
+
+---
+
+## ✅ What Is This Technique Called?
+
+👉 **Integer Encoding** (also called Word Indexing)
+- NOT one-hot encoding
+- NOT Bag of Words
+- Used as input for embedding layers or RNN-based models
+
+---
+
+## 🧠 When & Why Use Integer Encoding?
+
+| Use Case                     | Reason                                    |
+| ---------------------------- | ----------------------------------------- |
+| Embedding Layer Input        | Embedding layers require integer inputs   |
+| Preprocessing before LSTM/GRU| RNNs process sequences, not raw text      |
+| Sequence Classification Tasks| Like sentiment analysis, intent detection |
+| Token-based Generative AI    | Before feeding tokens to encoder/decoder layers in transformers |
+
+---
+
+## ✅ Real-Life Example: Input to an Embedding Layer
+
+```python
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Embedding, Flatten, Dense
+
+model = Sequential()
+model.add(Embedding(input_dim=14, output_dim=8, input_length=7))  # 14 words, output vectors of size 8
+model.add(Flatten())
+model.add(Dense(1, activation='sigmoid'))
+
+model.compile(optimizer='adam', loss='binary_crossentropy')
+model.summary()
+```
+
+---
+
+## 🔚 Summary
+
+| Concept           | Explanation                                         |
+| ----------------- | -------------------------------------------------- |
+| Tokenization      | Splitting text into words                          |
+| Integer Encoding  | Assigning each word a unique ID                    |
+| Sequence Encoding | Representing text as a sequence of integers        |
+| Padding           | Making all sequences the same length               |
+| Use in AI Models  | Required for embedding, RNN, LSTM, or transformer inputs |
+
 ## 🚀 What’s Next?
 
 Once text is encoded:
