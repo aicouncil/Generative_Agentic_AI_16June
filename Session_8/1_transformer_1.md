@@ -37,6 +37,34 @@ How does it work?
 +--------------------+
 ```
 
+### Encoder Block
+
+```
+Input
+ |
+ |-> Multi-head Self-Attention
+ |-> Add & Norm
+ |-> Feed Forward Network (FFN)
+ |-> Add & Norm
+Output
+```
+
+---
+
+### Decoder Block
+
+```
+Input
+ |
+ |-> Masked Multi-head Self-Attention
+ |-> Add & Norm
+ |-> Encoder-Decoder Attention
+ |-> Add & Norm
+ |-> Feed Forward Network
+ |-> Add & Norm
+Output
+```
+
 ---
 
 ## 🚶 Let’s Break It Down Step by Step
