@@ -197,17 +197,5 @@ def answer_question(question):
 import gradio as gr
 
 #gradio interface
-demo = gr.Interface(
-    file_input = gr.File(label = "Upload PDF" , file_types=[".pdf"]),
-    upload_btn = gr.Button("Process Document"),
-    status = gr.Textbox(label="Status"),
-    #upload_btn.click(fn = extract_data_from_pdf, inputs = file_input, output=status),
 
-    question_inputs = gr.Textbox(label = "Ask your question."),
-    outputs = gr.Textbox(label = "Answer" , lines = 2),
-
-    #question_inputs.submit(fn=answer_question, inputs=question_inputs , output=outputs)
-)
-
-demo.launch()
-
+   
