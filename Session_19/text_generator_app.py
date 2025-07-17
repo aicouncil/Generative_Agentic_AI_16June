@@ -5,11 +5,11 @@ import google.generativeai as genai
 
 client = openai.OpenAI(
                 #api_key = os.environ.get("OPENAI_API_KEY")
-                api_key = "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"
+                api_key = ""
                 )
 
 
-genai.configure(api_key="AIzaSyAJoYFwz7rFEMHKSr59uHtP6ikF4TOp5tU")
+genai.configure(api_key="")
 
 st.title("AI text Generator")
 st.markdown("Generate text using Gemini or GPT")
