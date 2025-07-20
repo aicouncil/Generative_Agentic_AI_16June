@@ -95,41 +95,107 @@ if st.button("Generate..."):
             except Exception as e:
                 st.error(f"Error: {str(e)}")
 ```
-This section handles the text generation when the "Generate..." button is clicked:
+This section handles the text generation when the "Generate..." button is clicked.
 
-if st.button("Generate..."): This creates a button. The code inside the if block will only execute when the button is pressed.
-if not prompt.strip():: This checks if the prompt is empty (or contains only whitespace). prompt.strip() removes leading/trailing whitespace.
-st.warning("Please enter a valid prompt!!"): If the prompt is empty, a warning message is displayed.
-with st.spinner("Generating..."): This displays a spinner while the text is being generated. The spinner disappears when the with block exits.
-try...except Exception as e:: This is a try-except block to catch any errors that might occur during the text generation process. This is important because API calls can fail for various reasons (network issues, invalid API key, rate limits, etc.).
-if model_choice == "GPT (OpenAI)":: If the user selected "GPT (OpenAI)":
-message = [{"role" : "user", "content": prompt}]: Formats the prompt into the structure expected by the OpenAI API. It's a list of dictionaries, where each dictionary represents a message. In this case, there's only one message, with the role "user" and the content being the user's prompt.
-response = client.responses.create(...): Calls the OpenAI API to generate text.
-model = "gpt-4.1-nano": Specifies the GPT model to use.
-input = message: Passes the formatted prompt to the API.
-temperature = 0.4: Sets the temperature parameter, which controls the randomness of the generated text. Lower values (e.g., 0.2) result in more predictable text, while higher values (e.g., 0.9) result in more creative and surprising text.
-st.success("Response Generated using GPT-"): Displays a success message.
-st.write(response.output_text): Writes the generated text to the Streamlit app.
-else:: If the user selected "Gemeini (Google)":
-model = genai.GenerativeModel('models/gemini-1.5-flash'): Loads the Gemini model.
-response = model.generate_content(prompt): Generates text using the Gemini model.
-st.success("Response Generated using Gemini APi-"): Displays a success message.
-st.write(response.text): Writes the generated text to the Streamlit app.
-st.error(f"Error: {str(e)}"): If any error occurs, this displays an error message to the user, including the error details.
-Example Usage
-Run the Streamlit app: streamlit run your_script_name.py (replace your_script_name.py with the actual name of your file).
-Enter a prompt in the text area, for example, "Write a short story about a cat who goes on an adventure."
-Choose either "GPT (OpenAI)" or "Gemeini (Google)".
-Click the "Generate..." button.
-The generated text will be displayed in the app.
-Key Improvements and Considerations
-Secure API Key Management: Never hardcode API keys. Use environment variables or a secrets management system.
-Error Handling: The try...except block is good, but you might want to handle specific exceptions more granularly (e.g., openai.APIError, google.generativeai.APIError). This allows you to provide more informative error messages to the user.
-Model Selection: Consider allowing the user to select from a wider range of models (e.g., different GPT models, different Gemini models).
-Temperature Control: Add a slider or number input to allow the user to control the temperature parameter.
-Input Validation: Implement more robust input validation to prevent unexpected errors.
-Rate Limiting: Be aware of the API rate limits for both OpenAI and Google Gemini. Implement rate limiting in your app to prevent exceeding the limits.
-Asynchronous Calls: For more complex applications, consider using asynchronous API calls to improve performance.
-UI Enhancements: Streamlit offers many features for improving the user interface, such as layout options, themes, and custom components.
+### Button and Input Validation
 
+- `if st.button("Generate..."):`  
+  This creates a button. The code inside the if block will only execute when the button is pressed.
 
+- `if not prompt.strip():`  
+  This checks if the prompt is empty (or contains only whitespace). `prompt.strip()` removes leading/trailing whitespace.
+
+- `st.warning("Please enter a valid prompt!!"):`  
+  If the prompt is empty, a warning message is displayed.
+
+### Spinner and Error Handling
+
+- `with st.spinner("Generating..."):`  
+  This displays a spinner while the text is being generated. The spinner disappears when the with block exits.
+
+- `try...except Exception as e:`  
+  This is a try-except block to catch any errors that might occur during the text generation process. This is important because API calls can fail for various reasons (network issues, invalid API key, rate limits, etc.).
+
+### Model Selection and API Calls
+
+- `if model_choice == "GPT (OpenAI)":`  
+  If the user selected "GPT (OpenAI)":
+
+    - `message = [{"role" : "user", "content": prompt}]`  
+      Formats the prompt into the structure expected by the OpenAI API. It's a list of dictionaries, where each dictionary represents a message. In this case, there's only one message, with the role "user" and the content being the user's prompt.
+
+    - `response = client.responses.create(...)`  
+      Calls the OpenAI API to generate text.
+
+        - `model = "gpt-4.1-nano"`: Specifies the GPT model to use.
+        - `input = message`: Passes the formatted prompt to the API.
+        - `temperature = 0.4`: Sets the temperature parameter, which controls the randomness of the generated text. Lower values (e.g., 0.2) result in more predictable text, while higher values (e.g., 0.9) result in more creative and surprising text.
+
+    - `st.success("Response Generated using GPT-")`  
+      Displays a success message.
+
+    - `st.write(response.output_text)`  
+      Writes the generated text to the Streamlit app.
+
+- `else:`  
+  If the user selected "Gemeini (Google)":
+
+    - `model = genai.GenerativeModel('models/gemini-1.5-flash')`  
+      Loads the Gemini model.
+
+    - `response = model.generate_content(prompt)`  
+      Generates text using the Gemini model.
+
+    - `st.success("Response Generated using Gemini APi-")`  
+      Displays a success message.
+
+    - `st.write(response.text)`  
+      Writes the generated text to the Streamlit app.
+
+- `st.error(f"Error: {str(e)}")`  
+  If any error occurs, this displays an error message to the user, including the error details.
+
+---
+
+## Example Usage
+
+1. Run the Streamlit app:  
+   `streamlit run your_script_name.py`  
+   (replace `your_script_name.py` with the actual name of your file).
+
+2. Enter a prompt in the text area, for example:  
+   `"Write a short story about a cat who goes on an adventure."`
+
+3. Choose either "GPT (OpenAI)" or "Gemeini (Google)".
+
+4. Click the "Generate..." button.
+
+5. The generated text will be displayed in the app.
+
+---
+
+## Key Improvements and Considerations
+
+- **Secure API Key Management:**  
+  Never hardcode API keys. Use environment variables or a secrets management system.
+
+- **Error Handling:**  
+  The try...except block is good, but you might want to handle specific exceptions more granularly (e.g., `openai.APIError`, `google.generativeai.APIError`). This allows you to provide more informative error messages to the user.
+
+- **Model Selection:**  
+  Consider allowing the user to select from a wider range of models (e.g., different GPT models, different Gemini models).
+
+- **Temperature Control:**  
+  Add a slider or number input to allow the user to control the temperature parameter.
+
+- **Input Validation:**  
+  Implement more robust input validation to prevent unexpected errors.
+
+- **Rate Limiting:**  
+  Be aware of the API rate limits for both OpenAI and Google Gemini. Implement rate limiting in your app to prevent exceeding the limits.
+
+- **Asynchronous Calls:**  
+  For more complex applications, consider using asynchronous API calls to improve performance.
+
+- **UI Enhancements:**  
+  Streamlit offers many features for improving the user interface, such as layout options,
