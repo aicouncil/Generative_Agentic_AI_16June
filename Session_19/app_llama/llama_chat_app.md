@@ -1,12 +1,17 @@
-Detailed Explanation of llama_chat_app.py
+# Detailed Explanation of `llama_chat_app.py`
+
 This file is a Streamlit web application that allows users to interact with a local LLama 3 language model. The app sends user prompts to the model and displays the generated responses.
 
-1. Imports
-```
+---
+
+## 1. Imports
+
+```python
 import streamlit as st
 import requests
 import json
 ```
+
 streamlit: Used for building the web interface.
 requests: For making HTTP requests to the LLama model server.
 json: For parsing JSON responses.
