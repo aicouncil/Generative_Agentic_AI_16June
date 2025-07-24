@@ -1,6 +1,3 @@
-Here's the updated information with the Flowise installation guide, in markdown format:
-
-The document "Generative & Agentic AI - 16th June - Notes by Gemini" summarizes a meeting from July 23, 2025, focusing on multi-agent frameworks and their development.
 
 Here's a breakdown of the key topics:
 
