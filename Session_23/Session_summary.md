@@ -1,0 +1,16 @@
+The meeting notes from July 31, 2025, titled "Generative & Agentic AI," cover a detailed explanation and demonstration of multi-agent frameworks, particularly Flowise.
+
+Here's a summary of the key points:
+
+  * **Multi-Agent Frameworks:** AI Council explained these frameworks as an architecture where a supervisor (LLM) guides multiple sub-agents, each assigned a specific task (e.g., searching, summarizing, writing proposals). This approach yields more refined results than single prompts, and different LLMs (GPT, Llama, Gemini) can power individual workers.
+  * **Frameworks and Installation:** Various frameworks like LangChain, LangGraph, VectorShift, LangFlow, and Flowise were reviewed, with an emphasis on choosing comfortable options and the preference for no-code methods due to faster development.
+  * **Flowise Installation:** Participants were guided through installing Flowise, which requires NodeJS version 18, 19, or 20. Flowise runs offline on a local host, using the machine's resources, but accessing LLMs like GPT still requires an internet connection via API. The installation command `npm install -g flowise` and the launch command `npx flowise start` were provided.
+  * **Flowise Interface:** Once launched, users set up an administrator account on `localhost:3000`. The interface includes sections for chat flows, agent flows, executions, assistants, marketplace, tools, credentials, variables, API keys, and documents.
+  * **OpenAI and Assistants:** The OpenAI API platform was demonstrated for creating "Assistants," which are task-dedicated agents unlike general LLMs. These can also be created directly within Flowise with the necessary API keys.
+  * **Flowise Marketplace and Tools:** The Flowise marketplace offers pre-built agents (e.g., for Hubspot integration, CSV analysis, financial research, email drafting) that can be modified. The "Tools" section allows for creating custom tools by adding APIs (e.g., weather forecasting, stock data) which can then be integrated into agents.
+  * **AI Teacher Application:** Pritam Kusiyait shared a project for an AI teacher application that uploads PDF books and answers questions based on their content. AI Council clarified this as a Retrieval Augmented Generation (RAG) application.
+  * **Troubleshooting Multi-Agent Systems:** Pritam Kusiyait faced issues with Flowise version two, which was noted as unstable, and AI Council recommended reverting to version one.
+  * **Connecting Supervisor and Workers:** In version one, AI Council demonstrated connecting a supervisor to two worker agents ("story Taylor" and "title generator"). The supervisor guides the process, determining when each worker is active, and is powered by an LLM (demonstrated with Google's Gemini, requiring an API key from AI Studio).
+  * **Testing and Debugging:** Initial testing showed "hallucinations" in the title generation, which AI Council attempted to resolve by adjusting the temperature parameter. Participants were encouraged to replicate the setup for further testing and modification in future sessions.
+
+**Suggested next steps** include AI Council fixing problems encountered by Pritam Kusiyait and Shivam Singh Patel, and Pritam Kusiyait and Shivam Singh Patel attempting to create the agent process and checking their outputs.
