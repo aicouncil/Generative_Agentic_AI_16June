@@ -1,3 +1,13 @@
+**Prompt for Prompt Engineer**
+I want 4 agents.
+The first agent should write a blog post on a topic, targeting people aged 30 to 60 years who are intrested in fitness.
+The second agent should create a script for a youtube video based on this blogpost.
+The third agent should generate 7 titles with high CTA for Youtube.
+The fourth agebt should generate 5 posts for X(formerly twitter) to drive more traffic to my blog.
+*****
+
+
+
 AGENT 1
 
 Name: Blog Writer
